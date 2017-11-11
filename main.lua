@@ -18,6 +18,14 @@ gTextures =
     Texture.Find("tiles_10.png"),
 }
 
+function GenerateUVs(texture, tileSize)
+local uvs = {}
+local textureWidth = texture:GetWidth() local textureHeight = texture:GetHeight() local width = tileSize / textureWidth local height = tileSize / textureHeight local cols = textureWidth / tileSize local rows = textureHeight / tileSize
+local u0 = 0 local v0 = 0 local u1 = width local v1 = height
+for j = 0, rows - 1 do for i = 0, cols -1 do table.insert(uvs, {u0, v0, u1, v1}) u0 = u0 + width u1 = u1 + width end u0 = 0 v0 = v0 + height u1 = width v1 = v1 + height end return uvs
+end
+
+
 gMap =
 {
     1,1,1,1,5,6, 7,1,   -- 1
@@ -27,6 +35,10 @@ gMap =
     9,9,9,9,9,9,10,1,   -- 5
     1,1,1,1,1,1,1,1,    -- 6
     1,1,1,1,1,1,2,3,    -- 7
+}
+gUVs = { -- Left Top Right Bottom -- U V U V {0, 0, 0.0625, 0.0625}, {0.0625, 0, 0.125, 0.0625}, {0.125, 0, 0.1875, 0.0625},
+44
+{0.1875, 0, 0.25, 0.0625}, {0.25, 0, 0.3125, 0.0625}, {0.3125, 0, 0.375, 0.0625}, {0.375, 0, 0.4375, 0.0625}, {0.4375, 0, 0.5, 0.0625}, {0.5, 0, 0.5625, 0.0625}, {0.5625, 0, 0.625, 0.0625}, {0.625, 0, 0.6875, 0.0625},
 }
 gMapWidth = 8
 gMapHeight = 7
